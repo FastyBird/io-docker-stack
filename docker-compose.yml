@@ -1,0 +1,373 @@
+version: '3.7'
+
+services:
+  # HTTP REQUEST PROXY
+  request-proxy:
+    image: io-server/request-proxy
+    container_name: io_server_request-proxy
+    restart: always
+    build:
+      context: .
+      dockerfile: ./containers/request-proxy/Dockerfile
+      args:
+        - APP_DOCUMENT_ROOT_PATH=${APP_DOCUMENT_ROOT_PATH}
+        - APP_GROUP=${APP_GROUP}
+        - APP_GROUP_ID=${APP_GROUP_ID}
+        - APP_USER=${APP_USER}
+        - APP_USER_ID=${APP_USER_ID}
+        - APP_TZ=${PHP_TIMEZONE}
+    depends_on:
+      - webui
+      - gateway-node
+    networks:
+      outside-world:
+      local-network:
+        aliases:
+          - ${NGINX_HOST}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=request-proxy
+      - traefik.frontend.rule=Host:${APP_DOMAIN}
+      - traefik.port=${NGINX_HOST_HTTP_PORT}
+      - traefik.docker.network=traefik-proxy
+
+  # WEB UI NODE
+  webui:
+    image: io-server/webui
+    container_name: io_server_webui
+    restart: always
+    build:
+      context: .
+      dockerfile: ./containers/webui/Dockerfile
+      args:
+        - TARGET_NODE_VERSION=${NODE_VERSION}
+        - APP_DOCUMENT_ROOT_PATH=${APP_DOCUMENT_ROOT_PATH}
+        - APP_GROUP=${APP_GROUP}
+        - APP_GROUP_ID=${APP_GROUP_ID}
+        - APP_USER=${APP_USER}
+        - APP_USER_ID=${APP_USER_ID}
+        - APP_TZ=${PHP_TIMEZONE}
+    networks:
+      - local-network
+    environment:
+      NODE_ENV: ${APP_MODE}
+      # Set app serving to permissive / assigned
+      NUXT_HOST: 0.0.0.0
+      # Set app port
+      NUXT_PORT: 5000
+
+  # API GATEWAY NODE
+  gateway-node:
+    image: fastybird/gateway-node:latest
+    container_name: io_server_gateway_node
+    restart: always
+    depends_on:
+      - mariadb-gateway-node
+      - rabbitmq
+      - storage-node
+      - devices-node
+      - triggers-node
+      - accounts-node
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_GATEWAY_HOST}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_GATEWAY_PORT}
+      FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
+      FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      FB_NODE_PARAMETER__SERVER_DOMAIN: ${APP_DOMAIN}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_GATEWAY_HOST}:${MYSQL_GATEWAY_PORT}
+
+  # ACCOUNTS NODE
+  accounts-node:
+    image: fastybird/accounts-node:latest
+    container_name: io_server_accounts_node
+    restart: always
+    depends_on:
+      - mariadb-accounts-node
+      - rabbitmq
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_ACCOUNTS_HOST}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_ACCOUNTS_PORT}
+      FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
+      FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_DEVICES_HOST}:${MYSQL_DEVICES_PORT}
+
+  # DEVICES NODE
+  devices-node:
+    image: fastybird/devices-node:latest
+    container_name: io_server_devices_node
+    restart: always
+    depends_on:
+      - mariadb-devices-node
+      - rabbitmq
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_DEVICES_HOST}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_DEVICES_PORT}
+      FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
+      FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_DEVICES_HOST}:${MYSQL_DEVICES_PORT}
+
+  # MQTT NODE
+  mqtt-node:
+    image: fastybird/mqtt-node:latest
+    container_name: io_server_mqtt_node
+    restart: always
+    depends_on:
+      - vernemq
+      - rabbitmq
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__MQTT_HOST: ${APP_DOMAIN}
+      FB_NODE_PARAMETER__MQTT_USERNAME: ${VERNE_MQ_USER}
+      FB_NODE_PARAMETER__MQTT_PASSWORD: ${VERNE_MQ_PASSWORD}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${APP_DOMAIN}:1883
+
+  # STORAGE NODE
+  storage-node:
+    image: fastybird/storage-node:latest
+    container_name: io_server_storage_node
+    restart: always
+    depends_on:
+      - couchdb
+      - rabbitmq
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__COUCHDB_HOST: ${COUCHDB_HOST}
+      FB_NODE_PARAMETER__COUCHDB_PORT: ${COUCHDB_PORT}
+      FB_NODE_PARAMETER__COUCHDB_USERNAME: ${COUCHDB_USER}
+      FB_NODE_PARAMETER__COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${COUCHDB_HOST}:${COUCHDB_PORT}
+
+  # WEBSOCKETS NODE
+  websockets-node:
+    image: fastybird/websockets-node:latest
+    container_name: io_server_websockets_node
+    restart: always
+    depends_on:
+      - rabbitmq
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__WS_PORT: ${WEBSOCKETS_PORT}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}
+
+  # TRIGGERS NODE
+  triggers-node:
+    image: fastybird/triggers-node:latest
+    container_name: io_server_triggers_node
+    restart: always
+    depends_on:
+      - mariadb-triggers-node
+      - rabbitmq
+    networks:
+      - local-network
+    environment:
+      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
+      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
+      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
+      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_TRIGGERS_HOST}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_TRIGGERS_PORT}
+      FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
+      FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_DEVICES_HOST}:${MYSQL_DEVICES_PORT}
+
+  # SSH TUNNEL CONTAINER
+  workspace:
+    image: io-server/workspace
+    container_name: io_server_workspace
+    build:
+      context: .
+      dockerfile: ./containers/workspace/Dockerfile
+      args:
+        - TARGET_PHP_VERSION=${PHP_VERSION}
+        - APP_DOCUMENT_ROOT_PATH=${APP_DOCUMENT_ROOT_PATH}
+        - APP_GROUP=${APP_GROUP}
+        - APP_GROUP_ID=${APP_GROUP_ID}
+        - APP_USER=${APP_USER}
+        - APP_USER_ID=${APP_USER_ID}
+        - APP_TZ=${PHP_TIMEZONE}
+    networks:
+      - local-network
+    ports:
+      - ${WORKSPACE_HOST_SSH_PORT}:22
+
+  # DATABASE GATEWAY NODE CONTAINER
+  mariadb-gateway-node:
+    image: mariadb
+    container_name: io_server_mariadb_gateway_noode
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_gateway_node_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - ${MYSQL_GATEWAY_HOST}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_GATEWAY_DATABASE}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
+  # DATABASE ACCOUNTS NODE CONTAINER
+  mariadb-accounts-node:
+    image: mariadb
+    container_name: io_server_mariadb_accounts_noode
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_accounts_node_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - ${MYSQL_ACCOUNTS_HOST}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_ACCOUNTS_DATABASE}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
+  # DATABASE DEVICES NODE CONTAINER
+  mariadb-devices-node:
+    image: mariadb
+    container_name: io_server_mariadb_devices_noode
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_devices_node_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - ${MYSQL_DEVICES_HOST}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DEVICES_DATABASE}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
+  # DATABASE TRIGGERS NODE CONTAINER
+  mariadb-triggers-node:
+    image: mariadb
+    container_name: io_server_mariadb_triggers_noode
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_triggers_node_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - ${MYSQL_TRIGGERS_HOST}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_TRIGGERS_DATABASE}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
+  # DEVICE STATES DATABASE CONTAINER
+  couchdb:
+    image: io-server/couchdb
+    container_name: io_server_couchdb
+    restart: always
+    build:
+      context: .
+      dockerfile: ./containers/couchdb/Dockerfile
+      args:
+        - TARGET_COUCHDB_VERSION=${COUCHDB_VERSION}
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    networks:
+      local-network:
+        aliases:
+          - ${COUCHDB_HOST}
+    environment:
+      COUCHDB_USER: ${COUCHDB_USER}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
+
+  # RABBIT MQ DATA EXCHANGE CONTAINER
+  rabbitmq:
+    image: io-server/rabbitmq
+    container_name: io_server_rabbitmq
+    restart: always
+    build:
+      context: .
+      dockerfile: ./containers/rabbitmq/Dockerfile
+      args:
+        - TARGET_RABBIT_MQ_VERSION=${RABBIT_MQ_VERSION}
+        - APP_HOST=${NGINX_HOST}
+        - RABBIT_MQ_USER=${RABBIT_MQ_USER}
+        - RABBIT_MQ_PASSWORD=${RABBIT_MQ_PASSWORD}
+    networks:
+      local-network:
+        aliases:
+          - ${RABBIT_MQ_HOST}
+
+  # VERNE MQ CONTAINER
+  vernemq:
+    image: io-server/vernemq
+    container_name: io_server_vernemq
+    restart: always
+    build:
+      context: .
+      dockerfile: ./containers/vernemq/Dockerfile
+      args:
+        - APP_HOST=${NGINX_HOST}
+        - APP_API_KEY=${APP_API_KEY}
+    networks:
+      - local-network
+    ports:
+      - 1883:1883
+      - 8883:8883
+      - 8888:8989
+
+networks:
+  outside-world:
+    external:
+      name: traefik-proxy
+  local-network:
+
+volumes:
+  mariadb_gateway_node_data:
+  mariadb_devices_node_data:
+  mariadb_triggers_node_data:
+  mariadb_accounts_node_data:
+  couchdb_data:
