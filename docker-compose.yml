@@ -1,60 +1,32 @@
 version: '3.7'
 
 services:
-  # HTTP REQUEST PROXY
-  request-proxy:
-    image: io-server/request-proxy
-    container_name: io_server_request-proxy
-    restart: always
-    build:
-      context: .
-      dockerfile: ./containers/request-proxy/Dockerfile
-      args:
-        - APP_DOCUMENT_ROOT_PATH=${APP_DOCUMENT_ROOT_PATH}
-        - APP_GROUP=${APP_GROUP}
-        - APP_GROUP_ID=${APP_GROUP_ID}
-        - APP_USER=${APP_USER}
-        - APP_USER_ID=${APP_USER_ID}
-        - APP_TZ=${PHP_TIMEZONE}
-    depends_on:
-      - webui
-      - gateway-node
-    networks:
-      outside-world:
-      local-network:
-        aliases:
-          - ${NGINX_HOST}
-    labels:
-      - traefik.enable=true
-      - traefik.backend=request-proxy
-      - traefik.frontend.rule=Host:${APP_DOMAIN}
-      - traefik.port=${NGINX_HOST_HTTP_PORT}
-      - traefik.docker.network=traefik-proxy
-
   # WEB UI NODE
-  webui:
-    image: io-server/webui
-    container_name: io_server_webui
+  web-ui-node:
+    image: fastybird/web-ui-node:latest
+    container_name: io_server_web_ui_node
     restart: always
-    build:
-      context: .
-      dockerfile: ./containers/webui/Dockerfile
-      args:
-        - TARGET_NODE_VERSION=${NODE_VERSION}
-        - APP_DOCUMENT_ROOT_PATH=${APP_DOCUMENT_ROOT_PATH}
-        - APP_GROUP=${APP_GROUP}
-        - APP_GROUP_ID=${APP_GROUP_ID}
-        - APP_USER=${APP_USER}
-        - APP_USER_ID=${APP_USER_ID}
-        - APP_TZ=${PHP_TIMEZONE}
     networks:
+      - outside-world
       - local-network
     environment:
-      NODE_ENV: ${APP_MODE}
-      # Set app serving to permissive / assigned
       NUXT_HOST: 0.0.0.0
-      # Set app port
       NUXT_PORT: 5000
+      NUXT_ENV_I18N_LOCALE: en
+      NUXT_ENV_I18N_FALLBACK_LOCALE: en
+      NUXT_ENV_MQTT_SERVER_ADDRESS: ${APP_WEB_UI_DOMAIN}
+      NUXT_ENV_API_KEY: ${APP_API_KEY}
+      NUXT_ENV_API_TARGET: https://${APP_API_DOMAIN}
+      NUXT_ENV_WS_KEY: ${APP_WS_KEY}
+      NUXT_ENV_WS_TARGET: wss://${APP_WS_DOMAIN}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=web-ui-node
+      - traefik.ui.protocol=http
+      - traefik.ui.entryPoints=https
+      - traefik.ui.frontend.rule=Host:${APP_WEB_UI_DOMAIN}
+      - traefik.ui.port=5000
+      - traefik.docker.network=traefik-proxy
 
   # API GATEWAY NODE
   gateway-node:
@@ -69,6 +41,7 @@ services:
       - triggers-node
       - accounts-node
     networks:
+      - outside-world
       - local-network
     environment:
       FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
@@ -79,8 +52,18 @@ services:
       FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_GATEWAY_PORT}
       FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      FB_NODE_PARAMETER__SERVER_DOMAIN: ${APP_DOMAIN}
+      FB_NODE_PARAMETER__CORS_DOMAIN: ${APP_DOMAIN}
+      FB_NODE_PARAMETER__CORS_PROTOCOL: http
+      FB_NODE_PARAMETER__CORS_PORT: 80
       WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_GATEWAY_HOST}:${MYSQL_GATEWAY_PORT}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=gateway-node
+      - traefik.api.protocol=http
+      - traefik.api.entryPoints=https
+      - traefik.api.frontend.rule=Host:${APP_API_DOMAIN}
+      - traefik.api.port=8000
+      - traefik.docker.network=traefik-proxy
 
   # ACCOUNTS NODE
   accounts-node:
@@ -173,6 +156,7 @@ services:
     depends_on:
       - rabbitmq
     networks:
+      - outside-world
       - local-network
     environment:
       FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
@@ -181,6 +165,14 @@ services:
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
       FB_NODE_PARAMETER__WS_PORT: ${WEBSOCKETS_PORT}
       WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=websockets-node
+      - traefik.ws.protocol=ws
+      - traefik.ws.entryPoints=wss
+      - traefik.ws.frontend.rule=Host:${APP_WS_DOMAIN}
+      - traefik.ws.port=${WEBSOCKETS_PORT}
+      - traefik.docker.network=traefik-proxy
 
   # TRIGGERS NODE
   triggers-node:
@@ -212,7 +204,6 @@ services:
       dockerfile: ./containers/workspace/Dockerfile
       args:
         - TARGET_PHP_VERSION=${PHP_VERSION}
-        - APP_DOCUMENT_ROOT_PATH=${APP_DOCUMENT_ROOT_PATH}
         - APP_GROUP=${APP_GROUP}
         - APP_GROUP_ID=${APP_GROUP_ID}
         - APP_USER=${APP_USER}
@@ -333,7 +324,6 @@ services:
       dockerfile: ./containers/rabbitmq/Dockerfile
       args:
         - TARGET_RABBIT_MQ_VERSION=${RABBIT_MQ_VERSION}
-        - APP_HOST=${NGINX_HOST}
         - RABBIT_MQ_USER=${RABBIT_MQ_USER}
         - RABBIT_MQ_PASSWORD=${RABBIT_MQ_PASSWORD}
     networks:
@@ -350,7 +340,7 @@ services:
       context: .
       dockerfile: ./containers/vernemq/Dockerfile
       args:
-        - APP_HOST=${NGINX_HOST}
+        - APP_HOST=${APP_API_DOMAIN}
         - APP_API_KEY=${APP_API_KEY}
     networks:
       - local-network

@@ -10,8 +10,6 @@ FROM rabbitmq:${TARGET_RABBIT_MQ_VERSION}-management-alpine
 
 # Docker file path
 ARG SERVICE_DIR="./containers/rabbitmq"
-# API service host
-ARG APP_HOST=io-fastybird.local
 # Default rabbit user
 ARG RABBIT_MQ_USER=admin
 ARG RABBIT_MQ_PASSWORD=admin
