@@ -189,11 +189,11 @@ services:
         aliases:
           - ui-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-triggers-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-ui-node.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      WAIT_HOSTS: mariadb-triggers-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
+      WAIT_HOSTS: mariadb-ui-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # DATABASE GATEWAY NODE CONTAINER
   mariadb-gateway-node:
