@@ -1,6 +1,6 @@
 require "auth/auth_commons"
 
-URL = "http://__APP_HOST/vernemq/authenticate"
+URL = "__APP_API_HOST/vernemq/authenticate"
 
 function auth_on_register(reg)
     if reg.username ~= nil and reg.password ~= nil then

@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  # HTTP REQUEST PROXY
+  request-proxy:
+    image: io-server/request-proxy
+    container_name: io_server_request-proxy
+    restart: always
+    build:
+      context: .
+      dockerfile: ./containers/request-proxy/Dockerfile
+    depends_on:
+      - web-ui-node
+      - gateway-node
+    networks:
+      outside-world:
+      local-network:
+        aliases:
+          - request-proxy.${LOCAL_DOMAIN}
+    environment:
+      VIRTUAL_HOST: ${APP_MASTER_DOMAIN}
+      LETSENCRYPT_HOST: ${APP_MASTER_DOMAIN}
+      LETSENCRYPT_EMAIL: ${APP_MASTER_EMAIL}
+
+  # WEB UI NODE
+  web-ui-node:
+    networks:
+      - outside-world
+    environment:
+      NUXT_ENV_WS_TARGET: wss://${APP_MASTER_DOMAIN}/socket

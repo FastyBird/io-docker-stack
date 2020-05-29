@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  # WEB UI NODE
+  web-ui-node:
+    networks:
+      - outside-world
+    environment:
+      NUXT_ENV_WS_TARGET: wss://${APP_WS_DOMAIN}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=web-ui-node
+      - traefik.ui.protocol=http
+      - traefik.ui.entryPoints=https
+      - traefik.ui.frontend.rule=Host:${APP_MASTER_DOMAIN}
+      - traefik.ui.port=5000
+      - traefik.docker.network=traefik-proxy
+
+  # API GATEWAY NODE
+  gateway-node:
+    networks:
+      - outside-world
+    environment:
+      FB_NODE_PARAMETER__NODE_HEADERS_CORS_DOMAIN: ${APP_MASTER_DOMAIN}
+      FB_NODE_PARAMETER__NODE_HEADERS_CORS_PROTOCOL: https
+      FB_NODE_PARAMETER__NODE_HEADERS_CORS_PORT: 80
+    labels:
+      - traefik.enable=true
+      - traefik.backend=gateway-node
+      - traefik.api.protocol=http
+      - traefik.api.entryPoints=https
+      - traefik.api.frontend.rule=Host:${APP_API_DOMAIN}
+      - traefik.api.port=8000
+      - traefik.docker.network=traefik-proxy
+
+  # WEBSOCKETS NODE
+  websockets-node:
+    networks:
+      - outside-world
+    labels:
+      - traefik.enable=true
+      - traefik.backend=websockets-node
+      - traefik.ws.protocol=ws
+      - traefik.ws.entryPoints=wss
+      - traefik.ws.frontend.rule=Host:${APP_WS_DOMAIN}
+      - traefik.ws.port=9878
+      - traefik.docker.network=traefik-proxy
+
+networks:
+  outside-world:
+    external:
+      name: traefik-proxy

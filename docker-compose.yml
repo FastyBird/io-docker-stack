@@ -7,26 +7,18 @@ services:
     container_name: io_server_web_ui_node
     restart: always
     networks:
-      - outside-world
-      - local-network
+      local-network:
+        aliases:
+          - web-ui-node.${LOCAL_DOMAIN}
     environment:
       NUXT_HOST: 0.0.0.0
       NUXT_PORT: 5000
       NUXT_ENV_I18N_LOCALE: en
       NUXT_ENV_I18N_FALLBACK_LOCALE: en
-      NUXT_ENV_MQTT_SERVER_ADDRESS: ${APP_WEB_UI_DOMAIN}
+      NUXT_ENV_API_TARGET: http://gateway-node.${LOCAL_DOMAIN}:8000
       NUXT_ENV_API_KEY: ${APP_API_KEY}
-      NUXT_ENV_API_TARGET: https://${APP_API_DOMAIN}
+      NUXT_ENV_WS_TARGET: ws://websockets-node.${LOCAL_DOMAIN}:9787
       NUXT_ENV_WS_KEY: ${APP_WS_KEY}
-      NUXT_ENV_WS_TARGET: wss://${APP_WS_DOMAIN}
-    labels:
-      - traefik.enable=true
-      - traefik.backend=web-ui-node
-      - traefik.ui.protocol=http
-      - traefik.ui.entryPoints=https
-      - traefik.ui.frontend.rule=Host:${APP_WEB_UI_DOMAIN}
-      - traefik.ui.port=5000
-      - traefik.docker.network=traefik-proxy
 
   # API GATEWAY NODE
   gateway-node:
@@ -41,29 +33,19 @@ services:
       - triggers-node
       - accounts-node
     networks:
-      - outside-world
-      - local-network
+      local-network:
+        aliases:
+          - gateway-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_HOST: rabbitmq.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
       FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_GATEWAY_HOST}
-      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_GATEWAY_PORT}
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-gateway-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      FB_NODE_PARAMETER__CORS_DOMAIN: ${APP_DOMAIN}
-      FB_NODE_PARAMETER__CORS_PROTOCOL: http
-      FB_NODE_PARAMETER__CORS_PORT: 80
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_GATEWAY_HOST}:${MYSQL_GATEWAY_PORT}
-    labels:
-      - traefik.enable=true
-      - traefik.backend=gateway-node
-      - traefik.api.protocol=http
-      - traefik.api.entryPoints=https
-      - traefik.api.frontend.rule=Host:${APP_API_DOMAIN}
-      - traefik.api.port=8000
-      - traefik.docker.network=traefik-proxy
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-gateway-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # ACCOUNTS NODE
   accounts-node:
@@ -72,19 +54,17 @@ services:
     restart: always
     depends_on:
       - mariadb-accounts-node
-      - rabbitmq
     networks:
-      - local-network
+      local-network:
+        aliases:
+          - accounts-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
-      FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
-      FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
-      FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_ACCOUNTS_HOST}
-      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_ACCOUNTS_PORT}
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-accounts-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_DEVICES_HOST}:${MYSQL_DEVICES_PORT}
+      FB_NODE_PARAMETER__NODE_TOKEN_SIGNATURE: ${APP_TOKEN_SIGNATURE}
+      WAIT_HOSTS: mariadb-accounts-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # DEVICES NODE
   devices-node:
@@ -95,17 +75,19 @@ services:
       - mariadb-devices-node
       - rabbitmq
     networks:
-      - local-network
+      local-network:
+        aliases:
+          - devices-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_HOST: rabbitmq.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
       FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_DEVICES_HOST}
-      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_DEVICES_PORT}
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-devices-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_DEVICES_HOST}:${MYSQL_DEVICES_PORT}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-devices-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # MQTT NODE
   mqtt-node:
@@ -116,16 +98,19 @@ services:
       - vernemq
       - rabbitmq
     networks:
-      - local-network
+      local-network:
+        aliases:
+          - mqtt-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_HOST: rabbitmq.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
       FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__MQTT_HOST: ${APP_DOMAIN}
+      FB_NODE_PARAMETER__MQTT_HOST: vernemq.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__MQTT_PORT: ${VERNE_MQ_PORT}
       FB_NODE_PARAMETER__MQTT_USERNAME: ${VERNE_MQ_USER}
       FB_NODE_PARAMETER__MQTT_PASSWORD: ${VERNE_MQ_PASSWORD}
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${APP_DOMAIN}:1883
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, vernemq.${LOCAL_DOMAIN}:${VERNE_MQ_PORT}
 
   # STORAGE NODE
   storage-node:
@@ -136,17 +121,19 @@ services:
       - couchdb
       - rabbitmq
     networks:
-      - local-network
+      local-network:
+        aliases:
+          - storage-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_HOST: rabbitmq.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
       FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__COUCHDB_HOST: ${COUCHDB_HOST}
+      FB_NODE_PARAMETER__COUCHDB_HOST: couchdb.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__COUCHDB_PORT: ${COUCHDB_PORT}
       FB_NODE_PARAMETER__COUCHDB_USERNAME: ${COUCHDB_USER}
       FB_NODE_PARAMETER__COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${COUCHDB_HOST}:${COUCHDB_PORT}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, couchdb.${LOCAL_DOMAIN}:${COUCHDB_PORT}
 
   # WEBSOCKETS NODE
   websockets-node:
@@ -156,23 +143,16 @@ services:
     depends_on:
       - rabbitmq
     networks:
-      - outside-world
-      - local-network
+      local-network:
+        aliases:
+          - websockets-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_HOST: rabbitmq.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
       FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__WS_PORT: ${WEBSOCKETS_PORT}
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}
-    labels:
-      - traefik.enable=true
-      - traefik.backend=websockets-node
-      - traefik.ws.protocol=ws
-      - traefik.ws.entryPoints=wss
-      - traefik.ws.frontend.rule=Host:${APP_WS_DOMAIN}
-      - traefik.ws.port=${WEBSOCKETS_PORT}
-      - traefik.docker.network=traefik-proxy
+      FB_NODE_PARAMETER__NODE_HEADERS_KEY: ${APP_WS_KEY}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}
 
   # TRIGGERS NODE
   triggers-node:
@@ -183,36 +163,37 @@ services:
       - mariadb-triggers-node
       - rabbitmq
     networks:
-      - local-network
+      local-network:
+        aliases:
+          - triggers-node.${LOCAL_DOMAIN}
     environment:
-      FB_NODE_PARAMETER__RABBITMQ_HOST: ${RABBIT_MQ_HOST}
+      FB_NODE_PARAMETER__RABBITMQ_HOST: rabbitmq.${LOCAL_DOMAIN}
       FB_NODE_PARAMETER__RABBITMQ_PORT: ${RABBIT_MQ_PORT}
       FB_NODE_PARAMETER__RABBITMQ_USERNAME: ${RABBIT_MQ_USER}
       FB_NODE_PARAMETER__RABBITMQ_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_NODE_PARAMETER__DATABASE_HOST: ${MYSQL_TRIGGERS_HOST}
-      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_TRIGGERS_PORT}
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-triggers-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
-      WAIT_HOSTS: ${RABBIT_MQ_HOST}:${RABBIT_MQ_PORT}, ${MYSQL_DEVICES_HOST}:${MYSQL_DEVICES_PORT}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-triggers-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
-  # SSH TUNNEL CONTAINER
-  workspace:
-    image: io-server/workspace
-    container_name: io_server_workspace
-    build:
-      context: .
-      dockerfile: ./containers/workspace/Dockerfile
-      args:
-        - TARGET_PHP_VERSION=${PHP_VERSION}
-        - APP_GROUP=${APP_GROUP}
-        - APP_GROUP_ID=${APP_GROUP_ID}
-        - APP_USER=${APP_USER}
-        - APP_USER_ID=${APP_USER_ID}
-        - APP_TZ=${PHP_TIMEZONE}
+  # UI NODE
+  ui-node:
+    image: fastybird/ui-node:latest
+    container_name: io_server_ui_node
+    restart: always
+    depends_on:
+      - mariadb-ui-node
     networks:
-      - local-network
-    ports:
-      - ${WORKSPACE_HOST_SSH_PORT}:22
+      local-network:
+        aliases:
+          - ui-node.${LOCAL_DOMAIN}
+    environment:
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-triggers-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
+      FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
+      FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      WAIT_HOSTS: mariadb-triggers-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # DATABASE GATEWAY NODE CONTAINER
   mariadb-gateway-node:
@@ -225,7 +206,7 @@ services:
     networks:
       local-network:
         aliases:
-          - ${MYSQL_GATEWAY_HOST}
+          - mariadb-gateway-node.${LOCAL_DOMAIN}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
@@ -245,7 +226,7 @@ services:
     networks:
       local-network:
         aliases:
-          - ${MYSQL_ACCOUNTS_HOST}
+          - mariadb-accounts-node.${LOCAL_DOMAIN}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
@@ -265,7 +246,7 @@ services:
     networks:
       local-network:
         aliases:
-          - ${MYSQL_DEVICES_HOST}
+          - mariadb-devices-node.${LOCAL_DOMAIN}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
@@ -285,12 +266,32 @@ services:
     networks:
       local-network:
         aliases:
-          - ${MYSQL_TRIGGERS_HOST}
+          - mariadb-triggers-node.${LOCAL_DOMAIN}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_TRIGGERS_DATABASE}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
+  # DATABASE UI NODE CONTAINER
+  mariadb-ui-node:
+    image: mariadb
+    container_name: io_server_mariadb_ui_noode
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_ui_node_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - mariadb-ui-node.${LOCAL_DOMAIN}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_UI_DATABASE}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "--silent"]
 
@@ -309,7 +310,7 @@ services:
     networks:
       local-network:
         aliases:
-          - ${COUCHDB_HOST}
+          - couchdb.${LOCAL_DOMAIN}
     environment:
       COUCHDB_USER: ${COUCHDB_USER}
       COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
@@ -329,7 +330,7 @@ services:
     networks:
       local-network:
         aliases:
-          - ${RABBIT_MQ_HOST}
+          - rabbitmq.${LOCAL_DOMAIN}
 
   # VERNE MQ CONTAINER
   vernemq:
@@ -340,19 +341,18 @@ services:
       context: .
       dockerfile: ./containers/vernemq/Dockerfile
       args:
-        - APP_HOST=${APP_API_DOMAIN}
+        - APP_API_HOST=http://gateway-node.${LOCAL_DOMAIN}:8000
         - APP_API_KEY=${APP_API_KEY}
     networks:
-      - local-network
+      local-network:
+        aliases:
+          - vernemq.${LOCAL_DOMAIN}
     ports:
       - 1883:1883
       - 8883:8883
-      - 8888:8989
+      - 8989:8989
 
 networks:
-  outside-world:
-    external:
-      name: traefik-proxy
   local-network:
 
 volumes:
@@ -360,4 +360,5 @@ volumes:
   mariadb_devices_node_data:
   mariadb_triggers_node_data:
   mariadb_accounts_node_data:
+  mariadb_ui_node_data:
   couchdb_data:

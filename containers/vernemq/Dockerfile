@@ -23,7 +23,7 @@ ENV DOCKER_VERNEMQ_LOG__CONSOLE=console \
 # Docker file path
 ARG SERVICE_DIR="./containers/vernemq"
 # API service host
-ARG APP_HOST=io-fastybird.local
+ARG APP_API_HOST=io-fastybird.local
 # API service host API key
 ARG APP_API_KEY=71298d56-a27f-4220-90c9-a36ba7e151d7
 
@@ -56,8 +56,8 @@ RUN chown -R vernemq:vernemq /vernemq/certs
 COPY ${SERVICE_DIR}/scripts/auth_http.lua /vernemq/share/lua/auth/auth_http.lua
 
 RUN /tmp/scripts/modify_config.sh /vernemq/share/lua/auth/auth_http.lua \
-    "__APP_HOST" \
-    "${APP_HOST}" \
+    "__APP_API_HOST" \
+    "${APP_API_HOST}" \
  && /tmp/scripts/modify_config.sh /vernemq/share/lua/auth/auth_http.lua \
     "__APP_API_KEY" \
     "${APP_API_KEY}" \

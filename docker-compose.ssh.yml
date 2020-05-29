@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  # SSH TUNNEL CONTAINER
+  workspace:
+    image: io-server/workspace
+    container_name: io_server_workspace
+    build:
+      context: .
+      dockerfile: ./containers/workspace/Dockerfile
+    networks:
+      - local-network
+    ports:
+      - ${WORKSPACE_SSH_PORT}:22
