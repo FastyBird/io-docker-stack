@@ -1,0 +1,29 @@
+{
+  "version" : 2,
+  "extra_config" : {},
+  "timeout" : "3000ms",
+  "cache_ttl" : "300s",
+  "output_encoding" : "json",
+  "endpoints" : [
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "extra_config" : {},
+      "querystring_params" : [],
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "extra_config" : {},
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    }
+  ]
+}

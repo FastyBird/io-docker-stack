@@ -20,6 +20,21 @@ services:
       NUXT_ENV_WS_TARGET: ws://websockets-node.${LOCAL_DOMAIN}:9787
       NUXT_ENV_WS_KEY: ${APP_WS_KEY}
 
+  # API GATEWAY
+  gateway:
+    image: devopsfaith/krakend:latest
+    container_name: io_server_gateway
+    volumes:
+      - ./containers/krakend:/etc/krakend
+    networks:
+      local-network:
+        aliases:
+          - gateway.${LOCAL_DOMAIN}
+    ports:
+      - "1234:1234"
+      - "8080:8080"
+      - "8090:8090"
+
   # API GATEWAY NODE
   gateway-node:
     image: fastybird/gateway-node:latest
