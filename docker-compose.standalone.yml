@@ -1,15 +1,15 @@
 version: '3.7'
 
 services:
+  # API GATEWAY
+  api-gateway:
+    ports:
+      - "${GATEWAY_PORT}:8000"
+
   # WEB UI NODE
   web-ui-node:
     ports:
       - "${WEB_PORT}:5000"
-
-  # API GATEWAY NODE
-  gateway-node:
-    ports:
-      - "${GATEWAY_PORT}:8000"
 
   # WEBSOCKETS NODE
   websockets-node:

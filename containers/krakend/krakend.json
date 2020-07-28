@@ -1,25 +1,937 @@
 {
   "version" : 2,
-  "extra_config" : {},
-  "timeout" : "3000ms",
-  "cache_ttl" : "300s",
   "output_encoding" : "json",
   "endpoints" : [
+    {
+      "endpoint" : "/devices-node/v1/devices",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
     {
       "endpoint" : "/devices-node/v1/devices/{device}",
       "method" : "GET",
       "output_encoding" : "json",
-      "extra_config" : {},
-      "querystring_params" : [],
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}",
           "encoding" : "json",
           "sd" : "static",
           "method" : "GET",
-          "extra_config" : {},
           "host" : [
             "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/configuration",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/configuration",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/configuration/{configuration}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/configuration/{configuration}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/configuration/{configuration}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/configuration/{configuration}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/properties",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/properties/{property}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties/{property}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/properties/{property}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties/{property}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/children",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/children",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/configuration",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/configuration",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/configuration/{configuration}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/configuration/{configuration}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/configuration/{configuration}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/configuration/{configuration}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/properties",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/properties",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/properties/{property}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/properties/{property}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/properties/{property}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/properties/{property}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/credentials",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/credentials",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/credentials/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/credentials/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/firmware",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/firmware",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/firmware/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/firmware/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/hardware",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/hardware",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/devices-node/v1/devices/{device}/hardware/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/hardware/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://devices-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/actions",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/actions",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/actions/{action}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/actions/{action}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/actions/{action}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/actions/{action}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/conditions",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/conditions",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/notifications",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/notifications",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://triggers-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/storage-node/v1/devices/{device}/properties",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/properties",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://storage-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/storage-node/v1/devices/{device}/properties/{property}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/properties/{property}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://storage-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/storage-node/v1/devices/{device}/channels/{channel}/properties",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://storage-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/storage-node/v1/devices/{device}/channels/{channel}/properties/{property}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties/{property}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://storage-node:8000"
           ],
           "disable_host_sanitize" : false
         }
