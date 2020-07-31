@@ -16,4 +16,4 @@ ARG SERVICE_DIR="./containers/krakend"
 #########################
 
 # KrakenD configuration
-COPY ${SERVICE_DIR}/kraken.json /etc/krakend/kraken.json
+COPY ${SERVICE_DIR}/krakend.json /etc/krakend/krakend.json

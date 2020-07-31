@@ -38,7 +38,7 @@ services:
   # AUTH NODE
   auth-node:
     image: fastybird/auth-node:latest
-    container_name: io_server_accounts_node
+    container_name: io_server_auth_node
     restart: always
     depends_on:
       - mariadb-auth-node
@@ -187,14 +187,14 @@ services:
       FB_NODE_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
       WAIT_HOSTS: mariadb-ui-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
-  # DATABASE ACCOUNTS NODE CONTAINER
+  # DATABASE AUTH NODE CONTAINER
   mariadb-auth-node:
     image: mariadb
-    container_name: io_server_mariadb_accounts_node
+    container_name: io_server_mariadb_auth_node
     restart: always
     volumes:
       # Mount database data folder
-      - mariadb_accounts_node_data:/var/lib/mysql
+      - mariadb_auth_node_data:/var/lib/mysql
     networks:
       local-network:
         aliases:
@@ -203,7 +203,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_ACCOUNTS_DATABASE}
+      MYSQL_DATABASE: ${MYSQL_AUTH_DATABASE}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "--silent"]
 
@@ -319,6 +319,12 @@ services:
       local-network:
         aliases:
           - vernemq.${LOCAL_DOMAIN}
+    environment:
+      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__HOST: mariadb-auth-node.${LOCAL_DOMAIN}
+      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__PORT: ${MYSQL_PORT}
+      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__USER: ${MYSQL_USER}
+      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__PASSWORD: ${MYSQL_PASSWORD}
+      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__DATABASE: ${MYSQL_AUTH_DATABASE}
     ports:
       - 1883:1883
       - 8883:8883
@@ -331,6 +337,6 @@ volumes:
   mariadb_gateway_node_data:
   mariadb_devices_node_data:
   mariadb_triggers_node_data:
-  mariadb_accounts_node_data:
+  mariadb_auth_node_data:
   mariadb_ui_node_data:
   couchdb_data:

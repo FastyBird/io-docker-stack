@@ -9,12 +9,14 @@ ENV DOCKER_VERNEMQ_LOG__CONSOLE=console \
     DOCKER_VERNEMQ_LISTENER__TCP__DEFAULT=0.0.0.0:1883 \
     DOCKER_VERNEMQ_LISTENER__SSL__DEFAULT=0.0.0.0:8883 \
     DOCKER_VERNEMQ_LISTENER__HTTP__DEFAULT=0.0.0.0:8989 \
-    DOCKER_VERNEMQ_LISTENER__SSL__CERTFILE=/vernemq/certs/cert.pem \
-    DOCKER_VERNEMQ_LISTENER__SSL__KEYFILE=/vernemq/certs/key.pem \
+    # DOCKER_VERNEMQ_LISTENER__SSL__CERTFILE=/vernemq/certs/cert.pem \
+    # DOCKER_VERNEMQ_LISTENER__SSL__KEYFILE=/vernemq/certs/key.pem \
     DOCKER_VERNEMQ_PLUGINS__VMQ_ACL=off \
     DOCKER_VERNEMQ_PLUGINS__VMQ_PASSWD=off \
     DOCKER_VERNEMQ_PLUGINS__VMQ_DIVERSITY=on \
-    DOCKER_VERNEMQ_VMQ_DIVERSITY__HTTP_AUTH__FILE=/vernemq/share/lua/auth/auth_http.lua
+    DOCKER_VERNEMQ_VMQ_DIVERSITY__AUTH_MYSQL__ENABLED=on \
+    DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__PASSWORD_HASH_METHOD=sha256
+    # DOCKER_VERNEMQ_VMQ_DIVERSITY__HTTP_AUTH__FILE=/vernemq/share/lua/auth/auth_http.lua
 
 ################################
 # CONTAINER REQUIRED ARGUMENTS #
@@ -23,9 +25,9 @@ ENV DOCKER_VERNEMQ_LOG__CONSOLE=console \
 # Docker file path
 ARG SERVICE_DIR="./containers/vernemq"
 # API service host
-ARG APP_API_HOST=io-fastybird.local
+# ARG APP_API_HOST=io-fastybird.local
 # API service host API key
-ARG APP_API_KEY=71298d56-a27f-4220-90c9-a36ba7e151d7
+# ARG APP_API_KEY=71298d56-a27f-4220-90c9-a36ba7e151d7
 
 # VerneMQ is switched to vernemq user by default
 USER root
@@ -53,18 +55,18 @@ RUN chown -R vernemq:vernemq /vernemq/certs
 ####################
 
 # VerneMQ auth lua plugin
-COPY ${SERVICE_DIR}/scripts/auth_http.lua /vernemq/share/lua/auth/auth_http.lua
+# COPY ${SERVICE_DIR}/scripts/auth_http.lua /vernemq/share/lua/auth/auth_http.lua
 
-RUN /tmp/scripts/modify_config.sh /vernemq/share/lua/auth/auth_http.lua \
-    "__APP_API_HOST" \
-    "${APP_API_HOST}" \
- && /tmp/scripts/modify_config.sh /vernemq/share/lua/auth/auth_http.lua \
-    "__APP_API_KEY" \
-    "${APP_API_KEY}" \
-;
+# RUN /tmp/scripts/modify_config.sh /vernemq/share/lua/auth/auth_http.lua \
+#     "__APP_API_HOST" \
+#     "${APP_API_HOST}" \
+#  && /tmp/scripts/modify_config.sh /vernemq/share/lua/auth/auth_http.lua \
+#     "__APP_API_KEY" \
+#     "${APP_API_KEY}" \
+# ;
 
 # Set access rights to scripts
-RUN chown vernemq:vernemq /vernemq/share/lua/auth/auth_http.lua
+# RUN chown vernemq:vernemq /vernemq/share/lua/auth/auth_http.lua
 
 #####################################
 # FINISHING CONTAINER CONFIGURATION #
