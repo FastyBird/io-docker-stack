@@ -936,6 +936,755 @@
           "disable_host_sanitize" : false
         }
       ]
+    },
+
+    {
+      "endpoint" : "/auth-node/v1/register",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/register",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/password-reset",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/password-reset",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/validate-email",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/validate-email",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/session",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/session",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/session",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/session",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/session",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/session",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/session",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/session",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/session/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/session/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/emails",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/emails",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/emails/{email}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/emails/{email}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/emails",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/emails",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/emails/{email}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/emails/{email}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/emails/{email}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/emails/{email}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/emails/{email}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/emails/{email}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/identities",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/identities",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/identities/{identity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/identities/{identity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/identities/{identity}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/identities/{identity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/me/identities/{identity}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/me/identities/{identity}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/emails",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/emails",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/emails/{email}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/emails",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/emails",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/emails/{email}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}",
+      "method" : "DELETE",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/emails/{email}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "DELETE",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/emails/{email}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/identities",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/identities",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/identities/{identity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/identities/{identity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/identities/{identity}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/identities/{identity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/accounts/{account}/identities/{identity}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/accounts/{account}/identities/{identity}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/roles",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/roles",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/roles/{role}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/roles/{role}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/roles/{role}",
+      "method" : "PATCH",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/roles/{role}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "PATCH",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/roles/{role}/relationships/{relationEntity}",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/roles/{role}/relationships/{relationEntity}",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/roles/{role}/children",
+      "method" : "GET",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/roles/{role}/children",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "GET",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
+    },
+    {
+      "endpoint" : "/auth-node/v1/authenticate/vernemq",
+      "method" : "POST",
+      "output_encoding" : "json",
+      "backend" : [
+        {
+          "url_pattern" : "/v1/authenticate/vernemq",
+          "encoding" : "json",
+          "sd" : "static",
+          "method" : "POST",
+          "host" : [
+            "http://auth-node:8000"
+          ],
+          "disable_host_sanitize" : false
+        }
+      ]
     }
   ]
 }
