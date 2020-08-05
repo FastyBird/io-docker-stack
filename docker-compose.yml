@@ -2,19 +2,23 @@ version: '3.7'
 
 services:
   # API GATEWAY
-  api-gateway:
-    image: io-server/krakend
-    container_name: io_server_api_gateway
+  gateway-node:
+    image: fastybird/gateway-node:latest
+    container_name: io_server_gateway_node
     restart: always
-    build:
-      context: .
-      dockerfile: ./containers/krakend/Dockerfile
-      args:
-        - TARGET_KRAKEND_VERSION=${KRAKEND_VERSION}
+    depends_on:
+      - mariadb-gateway-node
     networks:
       local-network:
         aliases:
-          - api-gateway.${LOCAL_DOMAIN}
+          - gateway-node.${LOCAL_DOMAIN}
+    environment:
+      FB_NODE_PARAMETER__DATABASE_HOST: mariadb-gateway-node.${LOCAL_DOMAIN}
+      FB_NODE_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
+      FB_NODE_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
+      FB_NODE_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      FB_NODE_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
+      WAIT_HOSTS: mariadb-gateway-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # WEB UI NODE
   web-ui-node:
@@ -30,7 +34,7 @@ services:
       NUXT_PORT: 5000
       NUXT_ENV_I18N_LOCALE: en
       NUXT_ENV_I18N_FALLBACK_LOCALE: en
-      NUXT_ENV_API_TARGET: http://api-gateway.${LOCAL_DOMAIN}:8000
+      NUXT_ENV_API_TARGET: http://gateway-node.${LOCAL_DOMAIN}:8000
       NUXT_ENV_API_KEY: ${APP_API_KEY}
       NUXT_ENV_WS_TARGET: ws://websockets-node.${LOCAL_DOMAIN}:9787
       NUXT_ENV_WS_KEY: ${APP_WS_KEY}
@@ -168,6 +172,26 @@ services:
       FB_NODE_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
       WAIT_HOSTS: mariadb-ui-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
+  # DATABASE GATEWAY NODE CONTAINER
+  mariadb-gateway-node:
+    image: mariadb
+    container_name: io_server_mariadb_gateway_node
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_gateway_node_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - mariadb-gateway-node.${LOCAL_DOMAIN}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_AUTH_DATABASE}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
   # DATABASE AUTH NODE CONTAINER
   mariadb-auth-node:
     image: mariadb
@@ -184,7 +208,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_AUTH_DATABASE}
+      MYSQL_DATABASE: ${MYSQL_GATEWAY_DATABASE}
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "--silent"]
 
@@ -294,7 +318,7 @@ services:
       context: .
       dockerfile: ./containers/vernemq/Dockerfile
       args:
-        - APP_API_HOST=http://api-gateway.${LOCAL_DOMAIN}:8000
+        - APP_API_HOST=http://gateway-node.${LOCAL_DOMAIN}:8000
         - APP_API_KEY=${APP_API_KEY}
     networks:
       local-network:

@@ -1,15 +1,15 @@
 {
   "version" : 2,
-  "output_encoding" : "json",
+  "output_encoding": "no-op",
   "endpoints" : [
     {
       "endpoint" : "/devices-node/v1/devices",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -22,11 +22,11 @@
     {
       "endpoint" : "/devices-node/v1/devices",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -39,11 +39,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -56,11 +56,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -73,11 +73,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -90,11 +90,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -107,11 +107,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -124,11 +124,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -141,11 +141,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -158,11 +158,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/configuration",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/configuration",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -175,11 +175,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/configuration/{configuration}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/configuration/{configuration}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -192,11 +192,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/configuration/{configuration}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/configuration/{configuration}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -209,11 +209,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/properties",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -226,11 +226,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/properties/{property}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties/{property}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -243,11 +243,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/channels/{channel}/properties/{property}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/channels/{channel}/properties/{property}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -260,11 +260,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/children",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/children",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -277,11 +277,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/configuration",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/configuration",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -294,11 +294,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/configuration/{configuration}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/configuration/{configuration}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -311,11 +311,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/configuration/{configuration}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/configuration/{configuration}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -328,11 +328,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/properties",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/properties",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -345,11 +345,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/properties/{property}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/properties/{property}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -362,11 +362,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/properties/{property}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/properties/{property}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -379,11 +379,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/credentials",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/credentials",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -396,11 +396,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/credentials/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/credentials/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -413,11 +413,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/firmware",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/firmware",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -430,11 +430,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/firmware/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/firmware/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -447,11 +447,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/hardware",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/hardware",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -464,11 +464,11 @@
     {
       "endpoint" : "/devices-node/v1/devices/{device}/hardware/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/devices/{device}/hardware/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -481,11 +481,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -498,11 +498,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -515,11 +515,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -532,11 +532,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -549,11 +549,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -566,11 +566,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/actions",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -583,11 +583,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/actions",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -600,11 +600,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/actions/{action}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -617,11 +617,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/actions/{action}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -634,11 +634,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/actions/{action}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -651,11 +651,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/actions/{action}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/actions/{action}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -668,11 +668,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/conditions",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -685,11 +685,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/conditions",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -702,11 +702,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -719,11 +719,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -736,11 +736,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -753,11 +753,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/conditions/{condition}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/conditions/{condition}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -770,11 +770,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/notifications",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -787,11 +787,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/notifications",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -804,11 +804,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -821,11 +821,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -838,11 +838,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -855,11 +855,11 @@
     {
       "endpoint" : "/triggers-node/v1/triggers/{trigger}/notifications/{notification}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/triggers/{trigger}/notifications/{notification}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -872,11 +872,11 @@
     {
       "endpoint" : "/auth-node/v1/register",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/register",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -889,11 +889,11 @@
     {
       "endpoint" : "/auth-node/v1/password-reset",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/password-reset",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -906,11 +906,11 @@
     {
       "endpoint" : "/auth-node/v1/validate-email",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/validate-email",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -923,11 +923,11 @@
     {
       "endpoint" : "/auth-node/v1/session",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/session",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -940,11 +940,11 @@
     {
       "endpoint" : "/auth-node/v1/session",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/session",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -957,11 +957,11 @@
     {
       "endpoint" : "/auth-node/v1/session",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/session",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -974,11 +974,11 @@
     {
       "endpoint" : "/auth-node/v1/session",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/session",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -991,11 +991,11 @@
     {
       "endpoint" : "/auth-node/v1/session/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/session/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1008,11 +1008,11 @@
     {
       "endpoint" : "/auth-node/v1/me",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1025,11 +1025,11 @@
     {
       "endpoint" : "/auth-node/v1/me",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1042,11 +1042,11 @@
     {
       "endpoint" : "/auth-node/v1/me",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -1059,11 +1059,11 @@
     {
       "endpoint" : "/auth-node/v1/me/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1076,11 +1076,11 @@
     {
       "endpoint" : "/auth-node/v1/me/emails",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/emails",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1093,11 +1093,11 @@
     {
       "endpoint" : "/auth-node/v1/me/emails/{email}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/emails/{email}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1110,11 +1110,11 @@
     {
       "endpoint" : "/auth-node/v1/me/emails",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/emails",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -1127,11 +1127,11 @@
     {
       "endpoint" : "/auth-node/v1/me/emails/{email}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/emails/{email}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1144,11 +1144,11 @@
     {
       "endpoint" : "/auth-node/v1/me/emails/{email}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/emails/{email}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -1161,11 +1161,11 @@
     {
       "endpoint" : "/auth-node/v1/me/emails/{email}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/emails/{email}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1178,11 +1178,11 @@
     {
       "endpoint" : "/auth-node/v1/me/identities",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/identities",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1195,11 +1195,11 @@
     {
       "endpoint" : "/auth-node/v1/me/identities/{identity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/identities/{identity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1212,11 +1212,11 @@
     {
       "endpoint" : "/auth-node/v1/me/identities/{identity}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/identities/{identity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1229,11 +1229,11 @@
     {
       "endpoint" : "/auth-node/v1/me/identities/{identity}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/me/identities/{identity}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1246,11 +1246,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1263,11 +1263,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1280,11 +1280,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -1297,11 +1297,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1314,11 +1314,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -1331,11 +1331,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1348,11 +1348,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/emails",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/emails",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1365,11 +1365,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/emails/{email}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1382,11 +1382,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/emails",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/emails",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
@@ -1399,11 +1399,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/emails/{email}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1416,11 +1416,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}",
       "method" : "DELETE",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/emails/{email}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "DELETE",
           "host" : [
@@ -1433,11 +1433,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/emails/{email}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/emails/{email}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1450,11 +1450,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/identities",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/identities",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1467,11 +1467,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/identities/{identity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/identities/{identity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1484,11 +1484,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/identities/{identity}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/identities/{identity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1501,11 +1501,11 @@
     {
       "endpoint" : "/auth-node/v1/accounts/{account}/identities/{identity}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/accounts/{account}/identities/{identity}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1518,11 +1518,11 @@
     {
       "endpoint" : "/auth-node/v1/roles",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/roles",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1535,11 +1535,11 @@
     {
       "endpoint" : "/auth-node/v1/roles/{role}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/roles/{role}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1552,11 +1552,11 @@
     {
       "endpoint" : "/auth-node/v1/roles/{role}",
       "method" : "PATCH",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/roles/{role}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "PATCH",
           "host" : [
@@ -1569,11 +1569,11 @@
     {
       "endpoint" : "/auth-node/v1/roles/{role}/relationships/{relationEntity}",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/roles/{role}/relationships/{relationEntity}",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1586,11 +1586,11 @@
     {
       "endpoint" : "/auth-node/v1/roles/{role}/children",
       "method" : "GET",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/roles/{role}/children",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "GET",
           "host" : [
@@ -1603,11 +1603,11 @@
     {
       "endpoint" : "/auth-node/v1/authenticate/vernemq",
       "method" : "POST",
-      "output_encoding" : "json",
+      "output_encoding": "no-op",
       "backend" : [
         {
           "url_pattern" : "/v1/authenticate/vernemq",
-          "encoding" : "json",
+          "encoding": "no-op",
           "sd" : "static",
           "method" : "POST",
           "host" : [
