@@ -17,4 +17,4 @@ $ docker-compose up -d
 Learn how to build docker stack in [documentation](https://github.com/FastyBird/io-docker-stack/blob/master/docs/en/index.md).
 
 ***
-Homepage [http://www.fastybird.com](http://www.fastybird.com) and repository [https://github.com/FastyBird/io-docker-stack](https://github.com/FastyBird/io-docker-stack).
+Homepage [https://www.fastybird.com](https://www.fastybird.com) and repository [https://github.com/FastyBird/io-docker-stack](https://github.com/FastyBird/io-docker-stack).

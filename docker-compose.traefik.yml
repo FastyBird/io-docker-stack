@@ -39,8 +39,8 @@ services:
       - traefik.http.services.ui.loadbalancer.server.port=5000
       - traefik.docker.network=traefik-proxy
 
-  # WEBSOCKETS NODE
-  websockets-node:
+  # UI NODE
+  ui-node:
     networks:
       - outside-world
     labels:
