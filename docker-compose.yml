@@ -338,4 +338,5 @@ volumes:
   mariadb_triggers_node_data:
   mariadb_auth_node_data:
   mariadb_ui_node_data:
+  mariadb_node_data:
   couchdb_data:
