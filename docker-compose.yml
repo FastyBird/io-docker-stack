@@ -7,18 +7,18 @@ services:
     container_name: io_server_gateway_node
     restart: always
     depends_on:
-      - mariadb-node
+      - mariadb
     networks:
       local-network:
         aliases:
           - gateway-node.${LOCAL_DOMAIN}
     environment:
-      FB_APP_PARAMETER__DATABASE_HOST: mariadb-node.${LOCAL_DOMAIN}
+      FB_APP_PARAMETER__DATABASE_HOST: mariadb.${LOCAL_DOMAIN}
       FB_APP_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_APP_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_APP_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       FB_APP_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
-      WAIT_HOSTS: mariadb-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
+      WAIT_HOSTS: mariadb.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # WEB UI NODE
   web-ui-node:
@@ -45,7 +45,7 @@ services:
     container_name: io_server_auth_node
     restart: always
     depends_on:
-      - mariadb-node
+      - mariadb
       - rabbitmq
     networks:
       local-network:
@@ -56,12 +56,12 @@ services:
       FB_APP_PARAMETER__EXCHANGE_PORT: ${RABBIT_MQ_PORT}
       FB_APP_PARAMETER__EXCHANGE_USERNAME: ${RABBIT_MQ_USER}
       FB_APP_PARAMETER__EXCHANGE_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_APP_PARAMETER__DATABASE_HOST: mariadb-node.${LOCAL_DOMAIN}
+      FB_APP_PARAMETER__DATABASE_HOST: mariadb.${LOCAL_DOMAIN}
       FB_APP_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_APP_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_APP_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       FB_APP_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
-      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # DEVICES NODE
   devices-node:
@@ -69,7 +69,7 @@ services:
     container_name: io_server_devices_node
     restart: always
     depends_on:
-      - mariadb-node
+      - mariadb
       - rabbitmq
       - vernemq
       - couchdb
@@ -82,7 +82,7 @@ services:
       FB_APP_PARAMETER__EXCHANGE_PORT: ${RABBIT_MQ_PORT}
       FB_APP_PARAMETER__EXCHANGE_USERNAME: ${RABBIT_MQ_USER}
       FB_APP_PARAMETER__EXCHANGE_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_APP_PARAMETER__DATABASE_HOST: mariadb-node.${LOCAL_DOMAIN}
+      FB_APP_PARAMETER__DATABASE_HOST: mariadb.${LOCAL_DOMAIN}
       FB_APP_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_APP_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_APP_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
@@ -96,7 +96,7 @@ services:
       FB_APP_PARAMETER__MQTT_PASSWORD: ${VERNE_MQ_PASSWORD}
       FB_APP_PARAMETER__MQTT_CLIENTID: ${VERNE_MQ_CLIENTID}
       FB_APP_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
-      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-node.${LOCAL_DOMAIN}:${MYSQL_PORT}, vernemq.${LOCAL_DOMAIN}:${VERNE_MQ_PORT}, couchdb.${LOCAL_DOMAIN}:${COUCHDB_PORT}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb.${LOCAL_DOMAIN}:${MYSQL_PORT}, vernemq.${LOCAL_DOMAIN}:${VERNE_MQ_PORT}, couchdb.${LOCAL_DOMAIN}:${COUCHDB_PORT}
 
   # TRIGGERS NODE
   triggers-node:
@@ -104,7 +104,7 @@ services:
     container_name: io_server_triggers_node
     restart: always
     depends_on:
-      - mariadb-node
+      - mariadb
       - rabbitmq
     networks:
       local-network:
@@ -115,12 +115,12 @@ services:
       FB_APP_PARAMETER__EXCHANGE_PORT: ${RABBIT_MQ_PORT}
       FB_APP_PARAMETER__EXCHANGE_USERNAME: ${RABBIT_MQ_USER}
       FB_APP_PARAMETER__EXCHANGE_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_APP_PARAMETER__DATABASE_HOST: mariadb-node.${LOCAL_DOMAIN}
+      FB_APP_PARAMETER__DATABASE_HOST: mariadb.${LOCAL_DOMAIN}
       FB_APP_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_APP_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_APP_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       FB_APP_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
-      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # UI NODE
   ui-node:
@@ -128,7 +128,7 @@ services:
     container_name: io_server_ui_node
     restart: always
     depends_on:
-      - mariadb-node
+      - mariadb
       - rabbitmq
     networks:
       local-network:
@@ -139,32 +139,13 @@ services:
       FB_APP_PARAMETER__EXCHANGE_PORT: ${RABBIT_MQ_PORT}
       FB_APP_PARAMETER__EXCHANGE_USERNAME: ${RABBIT_MQ_USER}
       FB_APP_PARAMETER__EXCHANGE_PASSWORD: ${RABBIT_MQ_PASSWORD}
-      FB_APP_PARAMETER__DATABASE_HOST: mariadb-node.${LOCAL_DOMAIN}
+      FB_APP_PARAMETER__DATABASE_HOST: mariadb.${LOCAL_DOMAIN}
       FB_APP_PARAMETER__DATABASE_PORT: ${MYSQL_PORT}
       FB_APP_PARAMETER__DATABASE_USERNAME: ${MYSQL_USER}
       FB_APP_PARAMETER__DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       FB_APP_PARAMETER__SECURITY_SIGNATURE: ${APP_TOKEN_SIGNATURE}
       FB_APP_PARAMETER__SERVER_KEYS: ${APP_WS_KEY}
-      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb-node.${LOCAL_DOMAIN}:${MYSQL_PORT}
-
-  # MYSQL DATABASE NODE CONTAINER
-  mariadb-node:
-    image: mariadb
-    container_name: io_server_mariadb_node
-    restart: always
-    volumes:
-      # Mount database data folder
-      - mariadb_node_data:/var/lib/mysql
-    networks:
-      local-network:
-        aliases:
-          - mariadb-node.${LOCAL_DOMAIN}
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      WAIT_HOSTS: rabbitmq.${LOCAL_DOMAIN}:${RABBIT_MQ_PORT}, mariadb.${LOCAL_DOMAIN}:${MYSQL_PORT}
 
   # MYSQL DATABASE CONTAINER
   mariadb:
@@ -185,7 +166,7 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "--silent"]
 
-  # DEVICE STATES DATABASE CONTAINER
+  # COUCH DB STATES DATABASE CONTAINER
   couchdb:
     image: io-server/couchdb
     container_name: io_server_couchdb
@@ -238,7 +219,7 @@ services:
         aliases:
           - vernemq.${LOCAL_DOMAIN}
     environment:
-      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__HOST: mariadb-node.${LOCAL_DOMAIN}
+      DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__HOST: mariadb.${LOCAL_DOMAIN}
       DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__PORT: ${MYSQL_PORT}
       DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__USER: ${MYSQL_USER}
       DOCKER_VERNEMQ_VMQ_DIVERSITY__MYSQL__PASSWORD: ${MYSQL_PASSWORD}
@@ -252,6 +233,5 @@ networks:
   local-network:
 
 volumes:
-  mariadb_node_data:
   mariadb_data:
   couchdb_data:
