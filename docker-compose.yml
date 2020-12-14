@@ -166,6 +166,25 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "--silent"]
 
+  # MYSQL DATABASE CONTAINER
+  mariadb:
+    image: mariadb
+    container_name: io_server_mariadb
+    restart: always
+    volumes:
+      # Mount database data folder
+      - mariadb_data:/var/lib/mysql
+    networks:
+      local-network:
+        aliases:
+          - mariadb.${LOCAL_DOMAIN}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+
   # DEVICE STATES DATABASE CONTAINER
   couchdb:
     image: io-server/couchdb
@@ -233,10 +252,6 @@ networks:
   local-network:
 
 volumes:
-  mariadb_gateway_node_data:
-  mariadb_devices_node_data:
-  mariadb_triggers_node_data:
-  mariadb_auth_node_data:
-  mariadb_ui_node_data:
   mariadb_node_data:
+  mariadb_data:
   couchdb_data:
